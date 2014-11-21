@@ -73,6 +73,7 @@ func main() {
 
     status := "OK"
     rv := 0
+    name := "JenkinsQueue"
 
     verbose := flag.Bool("v", false, "verbose output")
     warn := flag.Int("w", 10, "warning level for job queue depth")
@@ -92,7 +93,7 @@ func main() {
 
     defer func() {
         if err := recover(); err != nil {
-            fmt.Println("Unknown: ", err)
+            fmt.Println(name + " Unknown: ", err)
             os.Exit(3)
         }
     }()
@@ -105,7 +106,7 @@ func main() {
     jobs, err := get_content(url, *verbose)
     if err != nil {
 
-        fmt.Printf("Unknown: %T %s %#v\n",err, err, err)
+        fmt.Printf("%s Unknown: %T %s %#v\n", name, err, err, err)
 
         os.Exit(3)
 
@@ -119,7 +120,7 @@ func main() {
         rv = 2
     } 
 
-    fmt.Printf("%s: %d\n", status, jobs)
+    fmt.Printf("%s %s: %d\n", name, status, jobs)
     os.Exit(rv)
 
 }
