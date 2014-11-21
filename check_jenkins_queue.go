@@ -78,7 +78,7 @@ func main() {
     verbose := flag.Bool("v", false, "verbose output")
     warn := flag.Int("w", 10, "warning level for job queue depth")
     crit := flag.Int("c", 20, "critical level for job queue depth")
-    host := flag.String("h", "http://ci.walmartlabs.com/jenkins", "base url for jenkins  like http://ci.walmartlabs.com/jenkins")
+    host := flag.String("h", "http://ci.walmartlabs.com/jenkins", "base url for jenkins api like http://ci.walmartlabs.com/jenkins")
 
     url := *host + "/queue/api/json"
 
