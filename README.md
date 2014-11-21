@@ -1,11 +1,11 @@
 Nagios check for the Jenkins Queue in Go.
 =========================================
 
-> Usage of ./check_jenkins_queue:
->   -c=20: critical level for job queue depth
->   -h="http://ci.walmartlabs.com/jenkins": base url for jenkins  like http://ci.walmartlabs.com/jenkins
->   -v=false: verbose output
->   -w=10: warning level for job queue depth
+    Usage of ./check_jenkins_queue:
+      -c=20: critical level for job queue depth
+      -h="http://ci.walmartlabs.com/jenkins": base url for jenkins  like http://ci.walmartlabs.com/jenkins
+      -v=false: verbose output
+      -w=10: warning level for job queue depth
 
 Build it:
 ---------
