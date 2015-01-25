@@ -6,6 +6,8 @@ import "io/ioutil"
 import "encoding/json"
 import "flag"
 import "os"
+import "os/user"
+import 	"code.google.com/p/go-netrc/netrc"
 
 type SchedulesList struct {
 	Data []SchedulesListItem
@@ -92,8 +94,8 @@ func main() {
 	verbose := flag.Bool("v", false, "Verbose output")
 	warn := flag.Int("w", 10, "Warning level for blocked scheduled items")
 	crit := flag.Int("c", 20, "Critical level for blocked scheduled items")
-	username := flag.String("u", "", "Username for http Basic Auth")
-	password := flag.String("p", "", "Password for http Basic Auth")
+	_ = flag.String("u", "", "Noop: Backwards compatibility - use netrc for creds")
+	_ = flag.String("p", "", "Noop: Backwards compatibility - use netrc for creds")
 	host := flag.String("h", "http://gec-maven-nexus.walmart.com/nexus", "Base url for jenkins api like http://gec-maven-nexus.walmart.com/nexus")
 
 	flag.Parse()
@@ -120,7 +122,22 @@ func main() {
 		fmt.Printf("checking schedules on:url:%s:warning:%d:critical:%d\n", *url, *warn, *crit)
 
 	}
-	jobs, err := get_content(*url, *username, *password, *verbose)
+
+
+	self, err := user.Current()
+	if err != nil {
+		fmt.Printf("Get Current User:err:%t:\n", err)
+		os.Exit(3)
+	}
+
+	// fmt.Printf("--- ooEnvMerged.Site:\n%s\n\n", *ooEnvMerged.Site)
+	creds, err := netrc.FindMachine(self.HomeDir+"/.netrc", *host)
+	if err != nil {
+		fmt.Printf("NetRC Error:Couldn't find the key from the Login field:netrcfile:%s:machine:%s:\n", self.HomeDir+"/.netrc", *host)
+		os.Exit(3)
+	}
+
+	jobs, err := get_content(*url, creds.Login, creds.Password, *verbose)
 	if err != nil {
 
 		fmt.Printf("%s Unknown: %T %s %#v\n", name, err, err, err)
