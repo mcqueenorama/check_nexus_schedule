@@ -1,11 +1,11 @@
-Nagios check for the Jenkins Queue in Go.
+Check the number of nexus scheduled tasks 
 =========================================
 
-    Usage of ./check_jenkins_queue:
-      -c=20: critical level for job queue depth
-      -h="http://ci.walmartlabs.com/jenkins": base url for jenkins  like http://ci.walmartlabs.com/jenkins
+    Usage of ./check_nexus_schedule:
+      -c=20: critical level for numner of scheduled tasks
+      -h="http://nuch.com/nexus": base url for nexus  like http://zup.com/nexus
       -v=false: verbose output
-      -w=10: warning level for job queue depth
+      -w=10: warning level for number of scheduled tasks
 
 Build it:
 ---------
@@ -14,20 +14,6 @@ Build it:
 
 or:
 
-  go build check_jenkins_queue.go
+  go build check_nexus_schedule.go
 
-### Docker:
-
-Build it in docker for another platform:
-
-docker run -it -v /Users:/Users -w `pwd` google/golang go build check_jenkins_queue.go
-
-Jenkins API:
-------------
-
-The Jenkins API seems to be poorly documented.
-
-Access the Jenkins API:
-
-curl -v  http://ci.walmartlabs.com/jenkins/queue/api/json|json_pp
 
