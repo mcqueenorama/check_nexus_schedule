@@ -94,8 +94,6 @@ func main() {
 	verbose := flag.Bool("v", false, "Verbose output")
 	warn := flag.Int("w", 10, "Warning level for blocked scheduled items")
 	crit := flag.Int("c", 20, "Critical level for blocked scheduled items")
-	_ = flag.String("u", "", "Noop: Backwards compatibility - use netrc for creds")
-	_ = flag.String("p", "", "Noop: Backwards compatibility - use netrc for creds")
 	host := flag.String("h", "http://gec-maven-nexus.walmart.com/nexus", "Base url for jenkins api like http://gec-maven-nexus.walmart.com/nexus")
 
 	flag.Parse()
