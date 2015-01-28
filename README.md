@@ -7,6 +7,8 @@ Check the number of nexus scheduled tasks
       -v=false: verbose output
       -w=10: warning level for number of scheduled tasks
 
+    Creds comes from ~/.netrc.
+
 Build it:
 ---------
 
